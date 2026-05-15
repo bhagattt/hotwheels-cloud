@@ -7,9 +7,15 @@ const path = require('path');
 const http = require('http');
 const { URLSearchParams } = require('url');
 
+const puppeteerExtra = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+puppeteerExtra.use(StealthPlugin());
+
 async function loadPuppeteer() {
+    // With puppeteer-extra, we dynamically import the base puppeteer
     const mod = await import('puppeteer');
-    puppeteer = mod.default;
+    puppeteerExtra.puppeteer = mod.default;
+    puppeteer = puppeteerExtra;
 }
 
 // ============================================================
