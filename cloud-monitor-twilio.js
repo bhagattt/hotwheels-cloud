@@ -249,6 +249,11 @@ class CloudBlinkitMonitor {
                 };
             }
 
+            try {
+                // Save screenshot of what Blinkit is showing
+                await page.screenshot({ path: `/home/ubuntu/blinkit-monitor-debug.png` });
+            } catch (e) {}
+
             return { addressName: address.name, inStock: false, stockMessage: 'Status Unclear', productName, icon: '❓', responseTime: elapsed };
 
         } catch (error) {
